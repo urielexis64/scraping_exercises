@@ -32,12 +32,16 @@ class TripAdvisor(CrawlSpider):
         ),
     )
 
+    def formatPrice(self, text):
+        formattedText = text.replace('$', "").replace(',', '')
+        return formattedText
+
     def parse_hotel(self, response):
         sel = Selector(response)
         item = ItemLoader(Hotel(), sel)
 
         item.add_xpath('name', '//h1[@id="HEADING"]/text()')
-        item.add_xpath('price', '//div[@class="CEf5oHnZ"]/text()')
+        item.add_xpath('price', '//div[@class="CEf5oHnZ"]/text()', MapCompose(self.formatPrice))
         item.add_xpath('description', '//div[@class="_2f_ruteS _1bona3Pu _2-hMril5 _2uD5bLZZ"]/div[1]/text()')
         item.add_xpath('amenities', '//div[@class="_2rdvbNSg"]/text()')
 
