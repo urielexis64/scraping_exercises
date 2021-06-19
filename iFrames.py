@@ -13,6 +13,7 @@ class W3SCrawler(CrawlSpider):
     name = "w3s"
     custom_settings = {
         "USER_AGENT": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36",
+        "CLOSESPIDER_PAGECOUNT": 5
     }
 
     allowed_domains = ['w3schools.com']
